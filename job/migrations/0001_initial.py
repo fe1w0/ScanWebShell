@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('user', '0001_initial'),
-        ('django_celery_results', '0009_auto_20210416_2010'),
+       # ('django_celery_results', '0009_auto_20210416_2010'), 该参数可能会有问题
     ]
 
     operations = [

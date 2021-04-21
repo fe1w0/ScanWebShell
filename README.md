@@ -9,14 +9,24 @@
 
 ![image-20210421180717445](http://img.xzaslxr.xyz/image-20210421180717445.png)
 
-配置python 环境
+配置环境
 ```bash
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py collectstatic
+python3 manage.py createsuperuser
 ```
 
 在`celery`中设置`worker`为`redis`,需要 
 ```bash
-`docker run --name=redis -d -p 6379:6379 redis`
+docker pull redis:latest
+docker run --name=redis -d -p 6379:6379 redis
+```
+
+在`settings.py`添加
+```python
+ALLOWED_HOSTS = ['*']
 ```
 
 `celery`启动
