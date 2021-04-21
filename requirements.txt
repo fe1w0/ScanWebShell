@@ -29,6 +29,7 @@ redis==3.5.3
 requests==2.25.1
 toml==0.10.1
 tornado==6.1
+scikit-learn==0.24.1
 urllib3==1.26.4
 vine==5.0.0
 wcwidth==0.2.5

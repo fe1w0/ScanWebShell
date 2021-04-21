@@ -16,6 +16,9 @@ cd ScanWebShell
 ```
 
 * 配置环境
+    *  `php vld` 插件安装
+       http://pecl.php.net/package/vld
+    安装后`php -m`来确定是否安装   
     * `settings.py`
 ```bash
 cp ScanWebShell/settings.example.py  ScanWebShell/settings.py 

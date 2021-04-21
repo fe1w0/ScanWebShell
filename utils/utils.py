@@ -33,7 +33,7 @@ def load_php_opcode(phpfilename):
     :return:
     """
     try:
-        output = subprocess.check_output(['php.exe', '-dvld.active=1', '-dvld.execute=0', phpfilename], stderr=subprocess.STDOUT).decode()
+        output = subprocess.check_output(['php', '-dvld.active=1', '-dvld.execute=0', phpfilename], stderr=subprocess.STDOUT).decode()
         tokens = re.findall(r'\s(\b[A-Z_]{2,}\b)\s', output)  # {2,} 至少匹配两次,规避一开始三个错误的结果
         t = " ".join(tokens)
         return t
