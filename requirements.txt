@@ -11,14 +11,13 @@ click-didyoumean==0.0.3
 click-plugins==1.1.1
 click-repl==0.1.6
 colorama==0.4.3
-cryptography==3.4.7
 Django==3.2
 django-celery-results==2.0.1
 django-ranged-response==0.2.0
 django-simple-captcha==0.5.14
 humanize==3.4.1
 idna==2.10
-joblib=1.0.1
+joblib==1.0.1
 mccabe==0.6.1
 msgpack==1.0.2
 Pillow==8.1.2
