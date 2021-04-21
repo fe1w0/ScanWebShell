@@ -1,6 +1,14 @@
+# 介绍
+ScanWebShell 为基于机器学习的PHP-WebShell扫描工具,该版本为web服务形式。支持多用户独立使用和利用`celery`来配合扫描任务。
+
+* `index`![image-20210421173150850](http://img.xzaslxr.xyz/image-20210421173150850.png)
+
+* `job/count`![image-20210421180506546](http://img.xzaslxr.xyz/image-20210421180506546.png)
+
+
 # Usage
 
-邮箱功能需要在`settings.py`中配置如下参数:
+邮箱(用于注册和重置密码功能)需要在`settings.py`中配置如下参数:
 
 ![image-20210421180717445](http://img.xzaslxr.xyz/image-20210421180717445.png)
 
