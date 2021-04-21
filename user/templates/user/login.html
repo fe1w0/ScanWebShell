@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <link href="{% static 'user/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'user/css/login.css' %}" rel="stylesheet">
+    <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'user/css/cover.css' %}" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="cover-container d-flex w-400 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">ScanWebShell</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="/index/">Home</a>
+        <a class="nav-link" href="/user/register/">Register</a>
+        <a class="nav-link" href="/user/forget/">Forget</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="text-light">
+    <form class="form-login" action="/user/login/" method="post">
+
+        <img class="mb-4" src="{% static '/user/image/bg.jpg' %}" alt="" width="75" height="50">
+        <h3 class="text-center">欢迎登录</h3>
+          {% if message %}
+            <div class="alert alert-warning">{{ message }}</div>
+          {% endif %}
+          {% csrf_token %}
+
+            <p> <input type="text" name="username" class="form-control" placeholder="Username" autofocus="" maxlength="128" required id="id_username"></p>
+            <p> <input type="password" name="password" class="form-control" placeholder="Password" maxlength="256" required id="id_password"></p>
+            <p> <label for="id_captcha_1">验证码:</label>{{ login_form.captcha }} </p>
+        <div>
+            <button type="submit" class="btn btn-primary float-right">登录</button>
+          </div>
+    </form>
+</main>
+
+  <footer class="mt-auto text-white-50">
+    <p>Created by <a href="http://is.cumt.edu.cn/" class="text-white">BXS</a>@<a href="https://xzaslxr.xyz/" class="text-white">fe1w0</a>.</p>
+  </footer>
+</div>
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+  {#刷新验证码的脚本，放到body部分的最后面即可#}
+    <script>
+            $('.captcha').click(function () {
+                $.getJSON('/user/refresh/',function (result) {
+                    $('.captcha').attr('src',result['image_url']);
+                    $('#id_captcha_0').val(result['key']);
+                });
+            });
+    </script>
+
+  </body>
+</html>

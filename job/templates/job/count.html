@@ -1,0 +1,170 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Count</title>
+
+    <link href="{% static 'job/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'job/js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'job/css/cover.css' %}" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="cover-container d-flex w-400 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">ScanWebShell</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="/index/">Home</a>
+        <a class="nav-link" href="/job/upload/">Upload</a>
+        <a class="nav-link" href="/user/logout/">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="px-3">
+
+    <h3> 文件表格 </h3>
+    <table class="table table-dark table-responsive Newtable-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">上传时间</th>
+          <th scope="col">文件名</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in contacts_files %}
+            <tr>
+            <td>{{ file.c_time |date:"Y-m-d H:i:s" }}</td>
+            <td>{{ file.tmp_file }}</td>
+            <td><a class="btn btn-primary" role="button" href="/job/scan/?file={{ file.tmp_file }}">扫描</a></td>
+            </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center" >
+        {% if contacts_files.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page_file={{ contacts_files.previous_page_number }}&page_task={{ page_task }}" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for item in paginator_upload_file.page_range %}
+            {% if page_file == item %}
+                <li class="page-item disabled"><a class="page-link" href="?page_file={{ item }}&page_task={{ page_task }}">{{ item }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page_file={{ item }}&page_task={{ page_task }}">{{ item }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if contacts_files.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page_file={{ contacts_files.next_page_number }}&page_task={{ page_task }}" aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+    <h3> 任务表格 </h3>
+    <table class="table table-dark table-responsive Newtable-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">任务ID</th>
+          <th scope="col">时间</th>
+          <th scope="col">文件名</th>
+          <th scope="col">结果</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in contacts_tasks %}
+            <tr>
+            <th scope="row">{{ task.task_id }}</th>
+            <td>{{ task.c_time |date:"Y-m-d H:i:s" }}</td>
+            <td>{{ task.scan_file_name }}</td>
+            <td>{{ task.task_status }}</td>
+            <td><a class="btn btn-primary" role="button" href="/job/search/?task_id={{ task.task_id }}">详情</a></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center" >
+        {% if contacts_tasks.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page_file={{ page_file }}&page_task={{ contacts_tasks.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for item in paginator_scan_task.page_range %}
+            {% if page_task == item %}
+                <li class="page-item disabled"><a class="page-link" href="?page_file={{ page_file }}&page_task={{ item }}">{{ item }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page_file={{ page_file }}&page_task={{ item }}">{{ item }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if contacts_tasks.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page_file={{ page_file }}&page_task={{ contacts_tasks.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+  </main>
+
+  <footer class="mt-auto text-white-50">
+    <p>Created by <a href="http://is.cumt.edu.cn/" class="text-white">BXS</a>@<a href="https://xzaslxr.xyz/" class="text-white">fe1w0</a>.</p>
+  </footer>
+</div>
+  </body>
+</html>

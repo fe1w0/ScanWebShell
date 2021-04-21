@@ -1,6 +1,11 @@
-# Usage:
+# Usage
 
 邮箱功能需要在`settings.py`中配置如下参数:
+
+```bash
+
+
+```
 
 ![image-20210421180717445](http://img.xzaslxr.xyz/image-20210421180717445.png)
 
